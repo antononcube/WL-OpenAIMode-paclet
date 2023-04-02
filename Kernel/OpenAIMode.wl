@@ -34,6 +34,7 @@ Begin["`Private`"];
 (*Define your public and private symbols here:*)
 
 
+Needs["ChristopherWolfram`OpenAILink`"];
 
 (***********************************************************)
 (* Input execution                                         *)
@@ -55,7 +56,7 @@ nnOpenAIStyle =
         CellMargins -> {{66, 10}, {5, 10}},
         StyleKeyMapping -> {"Tab" -> "OpenAIInputExecuteToImage"},
         Evaluatable -> True,
-        CellEvaluationFunction -> (OpenAIMode`OpenAIInputExecuteToText[ToString[#1], Options[OpenAIMode`OpenAIInputExecuteToText]] &),
+        CellEvaluationFunction -> (AntonAntonov`OpenAIMode`OpenAIInputExecuteToText[ToString[#1], Options[AntonAntonov`OpenAIMode`OpenAIInputExecuteToText]] &),
         CellFrameColor -> GrayLevel[0.92],
         CellFrameLabels -> {{Cell[BoxData[rbOpenAI]], None}, {None, None}},
         AutoQuoteCharacters -> {}, FormatType -> InputForm,
@@ -69,7 +70,7 @@ nnOpenAIStyle =
       Cell[StyleData["OpenAIInputExecuteToImage"], CellFrame -> True,
         CellMargins -> {{66, 10}, {5, 10}},
         StyleKeyMapping -> {"Tab" -> "OpenAIInputExecuteToText"}, Evaluatable -> True,
-        CellEvaluationFunction -> (OpenAIMode`OpenAIInputExecuteToImage[ToString[#1], Options[OpenAIMode`OpenAIInputExecuteToImage]] &),
+        CellEvaluationFunction -> (AntonAntonov`OpenAIMode`OpenAIInputExecuteToImage[ToString[#1], Options[AntonAntonov`OpenAIMode`OpenAIInputExecuteToImage]] &),
         CellFrameColor -> GrayLevel[0.97],
         CellFrameLabels -> {{Cell[BoxData[rbOpenAI]], None}, {None, None}},
         FormatType -> InputForm, FontFamily -> "Courier",
@@ -157,8 +158,6 @@ OpenAIMode[nb_NotebookObject, True] := OpenAIMode[nb];
 
 OpenAIMode[nb_NotebookObject] :=
     Block[{},
-      (*It does not seem to have effect*)
-      (*OpenAICellPrompt[OptionValue[OpenAIMode, "CellPrompt"], OptionValue[OpenAIMode, "CellPromptLocation"]];*)
       SetOptions[nb, StyleDefinitions -> BinaryDeserialize[BinarySerialize[nnOpenAIStyle]]]
     ];
 
