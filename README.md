@@ -34,6 +34,41 @@ PacletInstall["AntonAntonov/OpenAIMode"]
 
 ## Usage
 
+This screenshot should give a good idea of paclet's utility:
+
+![](./Documentation/Diagrams/OpenAI-demo-thumbnail.png)
+
+This flowchart shows the execution steps while using "OpenAIMode":
+
+```mermaid
+flowchart TD
+OpenAI{{OpenAI}}
+OpenAILink[[" OpenAILink"]]
+TCC["Text completion cell"]
+IGC["Image generation cell"] 
+OC["Output cell"]
+UI[/"User input"/]
+UI --> TCC
+UI --> IGC
+TCC -.-> OpenAIInputExecuteToText -.-> OpenAILink
+IGC -.-> OpenAIInputExecuteToImage -.-> OpenAILink
+OpenAILink <-.-> OpenAI
+OpenAILink -.-> OC
+TCC --> OC
+IGC --> OC
+subgraph Notebook
+        TCC
+		OpenAIInputExecuteToText
+        IGC
+		OpenAIInputExecuteToImage
+        OC
+end   
+```
+
+----- 
+
+## Guides and demos
+
 See the demo video ["OpenAIMode demo (Mathematica)"](https://www.youtube.com/watch?v=htUIOqcS9uA).
 
 Here are the corresponding slides (in Markdown): 
