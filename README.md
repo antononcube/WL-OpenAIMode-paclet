@@ -1,5 +1,18 @@
 # OpenAIMode WL paclet
 
+## Introduction
+
+This repository has the code and documentation of Wolfram Language (WL) (aka Mathematica) 
+paclet that provides a notebooks style with 
+[OpenAI](https://platform.openai.com)
+interaction cells.
+
+It is assumed that the user of this paclet has:
+
+- An [OpenAI](https://platform.openai.com) account (i.e. authorization token)
+- Installed the [paclet "OpenAILink"](https://resources.wolframcloud.com/PacletRepository/resources/ChristopherWolfram/OpenAILink/)
+- Followed the [setup steps of "OpenAILink"](https://resources.wolframcloud.com/PacletRepository/resources/ChristopherWolfram/OpenAILink/tutorial/ConfiguringOpenAICredentials.html)
+
 ## Installation
 
 1. Install the 
