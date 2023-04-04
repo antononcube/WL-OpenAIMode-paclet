@@ -5095,11 +5095,12 @@ Cell[TextData[{
  CellID->1877656251,ExpressionUUID->"f229cf4c-0650-4f1b-946f-41b947dde059"],
 
 Cell["\<\
-Two type cells are provided: one for text completion, the other for image \
+Two types of cells are provided: one for text completion, the other for image \
 generation.\
 \>", "Notes",
  TaggingRules->{},
- CellChangeTimes->{{3.889436958145321*^9, 3.8894369806042757`*^9}},
+ CellChangeTimes->{{3.889436958145321*^9, 3.8894369806042757`*^9}, {
+  3.8895913921812143`*^9, 3.889591396540344*^9}},
  CellID->1526916345,ExpressionUUID->"a78dfd94-c8a8-4f19-911c-42f36e8cbea9"],
 
 Cell[TextData[{
@@ -12336,17 +12337,16 @@ to the paclet.", "MoreInfoText"], Background -> GrayLevel[0.95], FrameMargins ->
  CellTags->{"Links", "TemplateCellGroup"},
  CellID->179193585,ExpressionUUID->"810d46d3-dc0a-42eb-b2ba-df410a542838"],
 
-Cell[TextData[ButtonBox["ConversationalAgents/OpenAIMode.m at master \
-\[CenterDot] antononcube/ConversationalAgents \[CenterDot] GitHub",
+Cell[TextData[ButtonBox["OpenAILink",
  BaseStyle->"Hyperlink",
  ButtonData->{
-   URL["https://github.com/antononcube/ConversationalAgents/blob/master/\
-Packages/WL/OpenAIMode.m"], None},
+   URL["https://resources.wolframcloud.com/PacletRepository/resources/\
+ChristopherWolfram/OpenAILink/"], None},
  ButtonNote->
-  "https://github.com/antononcube/ConversationalAgents/blob/master/Packages/\
-WL/OpenAIMode.m"]], "Item",
- TaggingRules->{},
- CellID->1760750955,ExpressionUUID->"e2aa75dd-2afc-4e04-8599-fddf29f63122"],
+  "https://resources.wolframcloud.com/PacletRepository/resources/\
+ChristopherWolfram/OpenAILink/"]], "Item",
+ CellChangeTimes->{{3.889591456279633*^9, 3.8895914752162857`*^9}},
+ CellID->2103153810,ExpressionUUID->"4b9ef5e5-b636-42c9-8e59-798b2c7119cc"],
 
 Cell[TextData[ButtonBox["OpenAI API",
  BaseStyle->"Hyperlink",
@@ -12367,17 +12367,17 @@ Cell[TextData[ButtonBox["Video recording \"OpenAIMode demo\"",
   3.889459997825203*^9}},
  CellID->1843357332,ExpressionUUID->"9be988d7-d76c-4eb4-ad0c-6e8570f6ca49"],
 
-Cell[TextData[ButtonBox["https://resources.wolframcloud.com/PacletRepository/\
-resources/ChristopherWolfram/OpenAILink/",
+Cell[TextData[ButtonBox["ConversationalAgents/OpenAIMode.m at master \
+\[CenterDot] antononcube/ConversationalAgents \[CenterDot] GitHub",
  BaseStyle->"Hyperlink",
  ButtonData->{
-   URL["https://youtu.be/htUIOqcS9uA"], None},
- ButtonNote->"https://youtu.be/htUIOqcS9uA"]], "Item",
+   URL["https://github.com/antononcube/ConversationalAgents/blob/master/\
+Packages/WL/OpenAIMode.m"], None},
+ ButtonNote->
+  "https://github.com/antononcube/ConversationalAgents/blob/master/Packages/\
+WL/OpenAIMode.m"]], "Item",
  TaggingRules->{},
- CellChangeTimes->{{3.8894390689414053`*^9, 3.889439082832168*^9}, {
-   3.889459829126048*^9, 3.889459858009577*^9}, 3.889459998410981*^9, {
-   3.889518956143848*^9, 3.889518992618333*^9}},
- CellID->1599548646,ExpressionUUID->"129f285d-bb0c-48cf-b534-e819b2c1b48a"]
+ CellID->1760750955,ExpressionUUID->"e2aa75dd-2afc-4e04-8599-fddf29f63122"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -13715,9 +13715,26 @@ ChristopherWolfram/OpenAILink/"],
        SelectedNotebook[], All, CellContents, AutoScroll -> True]], 
    PassEventsDown -> False, PassEventsUp -> False},
  CellChangeTimes->{
-  3.889437921458249*^9, {3.889519002754436*^9, 3.889519013715259*^9}},
+  3.889437921458249*^9, {3.889519002754436*^9, 3.889519013715259*^9}, {
+   3.8895914929315968`*^9, 3.889591494057074*^9}},
  CellTags->{"DefaultContent", "TabNext"},
- CellID->908162033,ExpressionUUID->"937c19dc-0463-48eb-8993-d3659c46a833"]
+ CellID->908162033,ExpressionUUID->"937c19dc-0463-48eb-8993-d3659c46a833"],
+
+Cell[TextData[{
+ "The original code for this paclet was the package ",
+ ButtonBox["\"OpenAIMode.m\"",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://github.com/antononcube/ConversationalAgents/blob/master/\
+Packages/WL/OpenAIMode.m"], None},
+  ButtonNote->
+   "https://github.com/antononcube/ConversationalAgents/blob/master/Packages/\
+WL/OpenAIMode.m"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.889591496024478*^9, 3.8895915358837852`*^9}, {
+  3.88959157612361*^9, 3.889591576123975*^9}},
+ CellID->1879455561,ExpressionUUID->"a1308a09-27fe-4f16-a3bd-5c2bf8f141c1"]
 }, Open  ]]
 }, Open  ]]
 },
