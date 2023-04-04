@@ -139,25 +139,35 @@ OpenAIInputExecuteToText[boxData_String, opts : OptionsPattern[]] :=
     OpenAIInputExecute[boxData, Function -> ChristopherWolfram`OpenAILink`OpenAITextComplete, opts];
 
 Clear[OpenAIInputExecuteToImage];
-Options[OpenAIInputExecuteToImage] = Options[ChristopherWolfram`OpenAILink`OpenAIGenerateImage];
+Options[OpenAIInputExecuteToImage] = ReplaceAll[Options[ChristopherWolfram`OpenAILink`OpenAIGenerateImage], HoldPattern[ImageSize -> _] -> (ImageSize -> Small)];
 OpenAIInputExecuteToImage[boxData_String, opts : OptionsPattern[]] :=
     OpenAIInputExecute[boxData, Function -> ChristopherWolfram`OpenAILink`OpenAIGenerateImage, opts];
 
 (***********************************************************)
-(* OpenAIMode function                                       *)
+(* OpenAIMode function                                     *)
 (***********************************************************)
 
 Clear[OpenAIMode] ;
-Options[OpenAIMode] := {"CellPrompt" -> False, "CellPromptLocation" -> Top};
+Options[OpenAIMode] := {"TokenLimit" -> Automatic, ImageSize -> Small};
 
 OpenAIMode[True] := OpenAIMode[];
+OpenAIMode[True, opts : OptionsPattern[]] := OpenAIMode[opts];
 
 OpenAIMode[] := OpenAIMode[EvaluationNotebook[]];
+OpenAIMode[opts : OptionsPattern[]] := OpenAIMode[EvaluationNotebook[], opts];
 
-OpenAIMode[nb_NotebookObject, True] := OpenAIMode[nb];
+OpenAIMode[nb_NotebookObject, True, opts : OptionsPattern[]] := OpenAIMode[nb, opts];
 
-OpenAIMode[nb_NotebookObject] :=
-    Block[{},
+OpenAIMode[nb_NotebookObject, opts : OptionsPattern[]] :=
+    Block[{tokenLimit, imgSize},
+      tokenLimit = OptionValue[OpenAIMode, "TokenLimit"];
+      If[IntegerQ[tokenLimit] && tokenLimit > 0 || TrueQ[tokenLimit === Automatic],
+        SetOptions[OpenAIInputExecuteToText, OpenAITokenLimit -> tokenLimit]
+      ];
+
+      imgSize = OptionValue[OpenAIMode, ImageSize];
+      SetOptions[OpenAIInputExecuteToImage, ImageSize -> imgSize];
+
       SetOptions[nb, StyleDefinitions -> BinaryDeserialize[BinarySerialize[nnOpenAIStyle]]]
     ];
 
@@ -171,8 +181,8 @@ OpenAIMode[nb_NotebookObject, False] := SetOptions[nb, StyleDefinitions -> "Defa
 (***********************************************************)
 
 rbOpenAI =
-      GraphicsBox[
-        TagBox[RasterBox[CompressedData["
+    GraphicsBox[
+      TagBox[RasterBox[CompressedData["
 1:eJztnM/qZUcVhUNGDn0F38KpQ6cRHyDBGJxESATxtfoFo51O292/e889VXuv
 f3VOfRAh0HfXWt86iAH1D9/985u/f/3VV1/9/Lv//cs33/77Tz/99O1//vL7
 //3NX3/8+R8//Pj93/7847++/+H7n/743fs/9tXXH/76ZbPZbDabzWaz2Ww2
@@ -286,12 +296,12 @@ uEf/hNvETXHP/hG3h9viHv4Dbgs3xj39e9wObo17/D2/mb3+3dnz35w9/83Z
 vf7t2ePfnb3+7dnj3549/mZvv9nbb04+Ane6jZA9+maz2Ww2m81ms9lsNpsr
 8F+5aLRB
     "], {{0, 512.}, {512., 0}}, {0, 255},
-          ColorFunction->GrayLevel],
-          BoxForm`ImageTag["Byte", ColorSpace -> "Grayscale", Interleaving -> None],
-          Selectable->False],
-        DefaultBaseStyle->"ImageGraphics",
-        ImageSizeRaw->{22., 22.},
-        PlotRange->{{0, 512.}, {0, 512.}}];
+        ColorFunction -> GrayLevel],
+        BoxForm`ImageTag["Byte", ColorSpace -> "Grayscale", Interleaving -> None],
+        Selectable -> False],
+      DefaultBaseStyle -> "ImageGraphics",
+      ImageSizeRaw -> {22., 22.},
+      PlotRange -> {{0, 512.}, {0, 512.}}];
 
 
 (* ::Section:: *)
