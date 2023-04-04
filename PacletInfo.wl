@@ -5,7 +5,7 @@ PacletObject[
     "Name" -> "AntonAntonov/OpenAIMode",
     "Description" -> "Notebook style with cells for execution of OpenAI commands",
     "Creator" -> "Anton Antonov",
-    "Version" -> "1.0.3",
+    "Version" -> "1.0.4",
     "WolframVersion" -> "13.2+",
     "PublisherID" -> "AntonAntonov",
     "License" -> "MIT",
