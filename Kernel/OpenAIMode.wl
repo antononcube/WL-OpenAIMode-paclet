@@ -150,11 +150,13 @@ OpenAIInputExecute[boxData_String, opts : OptionsPattern[]] :=
 
 Clear[OpenAIInputExecuteToText];
 Options[OpenAIInputExecuteToText] = Options[ChristopherWolfram`OpenAILink`OpenAITextComplete];
+Options[OpenAIInputExecuteToText] = Append[Options[OpenAIInputExecuteToText], Epilog -> Identity];
 OpenAIInputExecuteToText[boxData_String, opts : OptionsPattern[]] :=
     OpenAIInputExecute[boxData, Function -> ChristopherWolfram`OpenAILink`OpenAITextComplete, opts];
 
 Clear[OpenAIInputExecuteToImage];
 Options[OpenAIInputExecuteToImage] = ReplaceAll[Options[ChristopherWolfram`OpenAILink`OpenAIGenerateImage], HoldPattern[ImageSize -> _] -> (ImageSize -> Small)];
+Options[OpenAIInputExecuteToImage] = Append[Options[OpenAIInputExecuteToImage], Epilog -> Identity];
 OpenAIInputExecuteToImage[boxData_String, opts : OptionsPattern[]] :=
     OpenAIInputExecute[boxData, Function -> ChristopherWolfram`OpenAILink`OpenAIGenerateImage, opts];
 
