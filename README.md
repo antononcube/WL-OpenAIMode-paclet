@@ -32,11 +32,42 @@ PacletInstall["AntonAntonov/OpenAIMode"]
 
 -----
 
-## Usage
+## Getting completions (answers) and images
 
 This screenshot should give a good idea of paclet's utility:
 
 ![](./Documentation/Diagrams/OpenAI-demo-thumbnail.png)
+
+See the demo video ["OpenAIMode demo (Mathematica)"](https://www.youtube.com/watch?v=htUIOqcS9uA).
+
+The corresponding
+[presentation notebook](https://community.wolfram.com/groups/-/m/t/2864162)
+can be obtained from [Community.wolfram.com](https://community.wolfram.com).
+
+Here are the corresponding slides (in Markdown):
+["OpenAIMode-demo.md"](https://github.com/antononcube/MathematicaForPrediction/blob/master/MarkdownDocuments/OpenAIMode-demo.md).
+
+------
+
+## Streamlined code generation and execution
+
+Code generation and execution can be streamlined using the option `Epilog` and the
+constellation of the paclet functions `CellPrint*`.
+
+This screenshot shows code generation and execution using voice dictation:
+
+![](./Documentation/Diagrams/OpenAIMode-code-generation-demo-thumbnail.png)
+
+See the code generation demo video
+["OpenAIMode code generation workflows demo (Mathematica et al.)"](https://www.youtube.com/watch?v=PGOtCWJgZEs).
+
+The corresponding
+[presentation notebook](https://community.wolfram.com/groups/-/m/t/2864162)
+can be obtained from [Community.wolfram.com](https://community.wolfram.com).
+
+-----
+
+## Flowchart
 
 This flowchart shows the execution steps while using "OpenAIMode":
 
@@ -45,13 +76,15 @@ flowchart TD
 OpenAI{{OpenAI}}
 OpenAILink[[" OpenAILink"]]
 TCC["Text completion cell"]
-IGC["Image generation cell"] 
+IGC["Image generation cell"]
+OIE["OpenAIInputExecute"]
 OC["Output cell"]
 UI[/"User input"/]
 UI --> TCC
 UI --> IGC
-TCC -.-> OpenAIInputExecuteToText -.-> OpenAILink
-IGC -.-> OpenAIInputExecuteToImage -.-> OpenAILink
+TCC -.-> OpenAIInputExecuteToText -.-> OIE
+IGC -.-> OpenAIInputExecuteToImage -.-> OIE
+OIE -.-> OpenAILink
 OpenAILink <-.-> OpenAI
 OpenAILink -.-> OC
 TCC --> OC
@@ -61,20 +94,7 @@ subgraph Notebook
 		OpenAIInputExecuteToText
         IGC
 		OpenAIInputExecuteToImage
+		OIE
         OC
 end   
 ```
-
------ 
-
-## Guides and demos
-
-See the demo video ["OpenAIMode demo (Mathematica)"](https://www.youtube.com/watch?v=htUIOqcS9uA).
-
-Here are the corresponding slides (in Markdown): 
-["OpenAIMode-demo.md"](https://github.com/antononcube/MathematicaForPrediction/blob/master/MarkdownDocuments/OpenAIMode-demo.md).
-
-The corresponding presentation notebook can be obtained
-(from [Community.wolfram.com](https://community.wolfram.com))
-[here](https://community.wolfram.com/groups/-/m/t/2864162).
-
