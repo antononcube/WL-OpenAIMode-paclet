@@ -20,6 +20,8 @@ OpenAIInputExecuteToText::usage = "Execution function for the cell style \"OpenA
 
 OpenAIInputExecuteToImage::usage = "Execution function for the cell style \"OpenAIInputExecuteToImage\".";
 
+OpenAIModeNotebookStyle::usage = "The OpenAIMode notebook style.";
+
 DeleteCells::usage = "Delete cells of a specified style.";
 
 CellPrintWL::usage = "CellPrintWL[s_String]";
@@ -55,7 +57,7 @@ Needs["ChristopherWolfram`OpenAILink`"];
 (* Input execution                                         *)
 (***********************************************************)
 
-nnOpenAIStyle =
+nbOpenAIStyle =
     Notebook[{
       Cell[StyleData[StyleDefinitions -> "Default.nb"]],
 
@@ -106,6 +108,13 @@ nnOpenAIStyle =
       StyleDefinitions -> "PrivateStylesheetFormatting.nb"
     ];
 
+
+(***********************************************************)
+(* Notebook style                                          *)
+(***********************************************************)
+
+Clear[OpenAIModeNotebookStyle];
+OpenAIModeNotebookStyle[] := nbOpenAIStyle;
 
 (***********************************************************)
 (* Input execution                                         *)
@@ -185,7 +194,7 @@ OpenAIMode[nb_NotebookObject, opts : OptionsPattern[]] :=
       imgSize = OptionValue[OpenAIMode, ImageSize];
       SetOptions[OpenAIInputExecuteToImage, ImageSize -> imgSize];
 
-      SetOptions[nb, StyleDefinitions -> BinaryDeserialize[BinarySerialize[nnOpenAIStyle]]]
+      SetOptions[nb, StyleDefinitions -> BinaryDeserialize[BinarySerialize[nbOpenAIStyle]]]
     ];
 
 OpenAIMode[False] := SetOptions[EvaluationNotebook[], StyleDefinitions -> "Default.nb"];
