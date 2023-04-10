@@ -64,7 +64,7 @@ nbOpenAIStyle =
       Cell[StyleData["Input"],
         StyleKeyMapping -> {
           "|" -> "OpenAIInputExecuteToText",
-          "@" -> "OpenAIInputExecuteToText",
+          "!" -> "OpenAIInputExecuteToText",
           "=" -> "WolframAlphaShort",
           ">" -> "ExternalLanguage",
           "Tab" -> "OpenAIInputExecuteToText"}],
