@@ -64,6 +64,7 @@ nbOpenAIStyle =
       Cell[StyleData["Input"],
         StyleKeyMapping -> {
           "|" -> "OpenAIInputExecuteToText",
+          "@" -> "OpenAIInputExecuteToText",
           "=" -> "WolframAlphaShort",
           ">" -> "ExternalLanguage",
           "Tab" -> "OpenAIInputExecuteToText"}],
@@ -79,7 +80,7 @@ nbOpenAIStyle =
         AutoQuoteCharacters -> {}, FormatType -> InputForm,
         MenuCommandKey :> "8", FontFamily -> "Courier",
         FontWeight -> Bold, Magnification -> 1.15` Inherited,
-        FontColor -> GrayLevel[0.4], Background -> RGBColor[0.97, 1, 0.95]
+        FontColor -> GrayLevel[0.35], Background -> RGBColor[0.97, 1, 0.95]
       ],
 
       Cell[StyleData["OpenAIInputExecuteToText", "SlideShow"], FontSize -> 20],
@@ -92,7 +93,7 @@ nbOpenAIStyle =
         CellFrameLabels -> {{Cell[BoxData[rbOpenAI]], None}, {None, None}},
         FormatType -> InputForm, FontFamily -> "Courier",
         FontWeight -> Bold, Magnification -> 1.15` Inherited,
-        FontColor -> GrayLevel[0.4], Background -> RGBColor[0.97, 0.97, 1]
+        FontColor -> GrayLevel[0.35], Background -> RGBColor[0.97, 0.97, 1]
       ],
 
       Cell[StyleData["OpenAIInputExecuteToImage", "SlideShow"], FontSize -> 20],
