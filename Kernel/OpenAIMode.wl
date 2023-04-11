@@ -18,6 +18,8 @@ Used OpenAIInputExecuteToText and OpenAIInputExecuteToImage.";
 
 OpenAIInputExecuteToText::usage = "Execution function for the cell style \"OpenAIInputExecuteToText\".";
 
+OpenAIInputExecuteToChat::usage = "Execution function for the cell style \"OpenAIInputExecuteToChat\".";
+
 OpenAIInputExecuteToImage::usage = "Execution function for the cell style \"OpenAIInputExecuteToImage\".";
 
 OpenAIModeNotebookStyle::usage = "The OpenAIMode notebook style.";
@@ -72,7 +74,7 @@ nbOpenAIStyle =
       Cell[StyleData["OpenAIInputExecuteToText"],
         CellFrame -> True,
         CellMargins -> {{66, 10}, {5, 10}},
-        StyleKeyMapping -> {"Tab" -> "OpenAIInputExecuteToImage"},
+        StyleKeyMapping -> {"Tab" -> "OpenAIInputExecuteToChat"},
         Evaluatable -> True,
         CellEvaluationFunction -> (AntonAntonov`OpenAIMode`OpenAIInputExecuteToText[ToString[#1], Options[AntonAntonov`OpenAIMode`OpenAIInputExecuteToText]] &),
         CellFrameColor -> GrayLevel[0.92],
@@ -80,10 +82,26 @@ nbOpenAIStyle =
         AutoQuoteCharacters -> {}, FormatType -> InputForm,
         MenuCommandKey :> "8", FontFamily -> "Courier",
         FontWeight -> Bold, Magnification -> 1.15` Inherited,
-        FontColor -> GrayLevel[0.35], Background -> RGBColor[0.97, 1, 0.95]
+        FontColor -> GrayLevel[0.4], Background -> RGBColor[0.97, 1, 0.95]
       ],
 
       Cell[StyleData["OpenAIInputExecuteToText", "SlideShow"], FontSize -> 20],
+
+      Cell[StyleData["OpenAIInputExecuteToChat"],
+        CellFrame -> True,
+        CellMargins -> {{66, 10}, {5, 10}},
+        StyleKeyMapping -> {"Tab" -> "OpenAIInputExecuteToImage"},
+        Evaluatable -> True,
+        CellEvaluationFunction -> (AntonAntonov`OpenAIMode`OpenAIInputExecuteToChat[ToString[#1], Options[AntonAntonov`OpenAIMode`OpenAIInputExecuteToChat]] &),
+        CellFrameColor -> GrayLevel[0.92],
+        CellFrameLabels -> {{Cell[BoxData[rbOpenAI]], None}, {None, None}},
+        AutoQuoteCharacters -> {}, FormatType -> InputForm,
+        MenuCommandKey :> "8", FontFamily -> "Courier",
+        FontWeight -> Bold, Magnification -> 1.15` Inherited,
+        FontColor -> GrayLevel[0.4], Background -> RGBColor[1, 1, 0.95]
+      ],
+
+      Cell[StyleData["OpenAIInputExecuteToChat", "SlideShow"], FontSize -> 20],
 
       Cell[StyleData["OpenAIInputExecuteToImage"], CellFrame -> True,
         CellMargins -> {{66, 10}, {5, 10}},
@@ -93,7 +111,7 @@ nbOpenAIStyle =
         CellFrameLabels -> {{Cell[BoxData[rbOpenAI]], None}, {None, None}},
         FormatType -> InputForm, FontFamily -> "Courier",
         FontWeight -> Bold, Magnification -> 1.15` Inherited,
-        FontColor -> GrayLevel[0.35], Background -> RGBColor[0.97, 0.97, 1]
+        FontColor -> GrayLevel[0.4], Background -> RGBColor[0.97, 0.97, 1]
       ],
 
       Cell[StyleData["OpenAIInputExecuteToImage", "SlideShow"], FontSize -> 20],
@@ -127,6 +145,9 @@ FullFunctionName[func_] :=
       MemberQ[{OpenAITextComplete, "OpenAITextComplete", ChristopherWolfram`OpenAILink`OpenAITextComplete}, func],
       ChristopherWolfram`OpenAILink`OpenAITextComplete,
 
+      MemberQ[{OpenAIChatComplete, "OpenAIChatComplete", ChristopherWolfram`OpenAILink`OpenAIChatComplete}, func],
+      ChristopherWolfram`OpenAILink`OpenAIChatComplete,
+
       MemberQ[{OpenAIGenerateImage, "OpenAIGenerateImage", ChristopherWolfram`OpenAILink`OpenAIGenerateImage}, func],
       ChristopherWolfram`OpenAILink`OpenAIGenerateImage,
 
@@ -148,7 +169,7 @@ Options[OpenAIInputExecute] = {
   ImageSize -> Automatic
 };
 
-OpenAIInputExecute[boxData_String, opts : OptionsPattern[]] :=
+OpenAIInputExecute[boxData : (_String | _OpenAIChatMessageObject), opts : OptionsPattern[]] :=
     Block[{epilogFunc = OptionValue[OpenAIInputExecute, Epilog],
       func = FullFunctionName @ OptionValue[OpenAIInputExecute, Function]},
       epilogFunc @ func[boxData, FilterRules[{opts}, Options[func]]]
@@ -163,6 +184,12 @@ Options[OpenAIInputExecuteToText] = Options[ChristopherWolfram`OpenAILink`OpenAI
 Options[OpenAIInputExecuteToText] = Append[Options[OpenAIInputExecuteToText], Epilog -> Identity];
 OpenAIInputExecuteToText[boxData_String, opts : OptionsPattern[]] :=
     OpenAIInputExecute[boxData, Function -> ChristopherWolfram`OpenAILink`OpenAITextComplete, opts];
+
+Clear[OpenAIInputExecuteToChat];
+Options[OpenAIInputExecuteToChat] = Options[ChristopherWolfram`OpenAILink`OpenAIChatComplete];
+Options[OpenAIInputExecuteToChat] = Append[Options[OpenAIInputExecuteToChat], Epilog -> (#["Text"]&)];
+OpenAIInputExecuteToChat[boxData_String, opts : OptionsPattern[]] :=
+    OpenAIInputExecute[OpenAIChatMessageObject[<|"Role" -> "user", "Text" -> boxData|>], Function -> ChristopherWolfram`OpenAILink`OpenAIChatComplete, opts];
 
 Clear[OpenAIInputExecuteToImage];
 Options[OpenAIInputExecuteToImage] = ReplaceAll[Options[ChristopherWolfram`OpenAILink`OpenAIGenerateImage], HoldPattern[ImageSize -> _] -> (ImageSize -> Small)];
