@@ -49,13 +49,14 @@ Needs["ChristopherWolfram`OpenAILink`"];
 
 nbOpenAIStyle =
     Notebook[{
-      Cell[StyleData[StyleDefinitions -> "Default.nb"]],
+      Cell[StyleData[StyleDefinitions -> If[$VersionNumber >= 13.3, "Chatbook.nb", "Default.nb"]]],
 
       Cell[StyleData["Input"],
         StyleKeyMapping -> {
           "|" -> "OpenAIInputExecuteToText",
           "!" -> "OpenAIInputExecuteToText",
           "=" -> "WolframAlphaShort",
+          "'" -> "ChatInput",
           ">" -> "ExternalLanguage",
           "Tab" -> "OpenAIInputExecuteToText"}],
 
@@ -216,9 +217,9 @@ OpenAIMode[nb_NotebookObject, opts : OptionsPattern[]] :=
       SetOptions[nb, StyleDefinitions -> BinaryDeserialize[BinarySerialize[nbOpenAIStyle]]]
     ];
 
-OpenAIMode[False] := SetOptions[EvaluationNotebook[], StyleDefinitions -> "Default.nb"];
+OpenAIMode[False] := SetOptions[EvaluationNotebook[], StyleDefinitions -> If[$VersionNumber >= 13.3, "Chatbook.nb", "Default.nb"]];
 
-OpenAIMode[nb_NotebookObject, False] := SetOptions[nb, StyleDefinitions -> "Default.nb"];
+OpenAIMode[nb_NotebookObject, False] := SetOptions[nb, StyleDefinitions -> If[$VersionNumber >= 13.3, "Chatbook.nb", "Default.nb"]];
 
 (***********************************************************)
 (* Icon                                                    *)
